@@ -29,6 +29,13 @@
   },
   "customNotes": [],
   "directoryMap": {},
-  "hotPaths": [],
+  "hotPaths": [
+    {
+      "path": "README.md",
+      "accessCount": 1,
+      "lastAccessed": 1778510844600,
+      "type": "file"
+    }
+  ],
   "userDirectives": []
 }
