@@ -129,7 +129,32 @@ where-sindang/
 
 이후 Step 1~7(Next.js 골격 → Notion 어댑터 → 라우트 → 지도 → 필터/공유/SEO → Webhook/Admin → 시드/QA/런칭)은 plan §6 참고.
 
-## 9. License & 권리
+## 9. Getting Started (로컬 개발)
+
+기본 스캐폴드(Next.js 16 + React 19 + Tailwind v4 + TypeScript)가 적용되어 있습니다.
+
+```bash
+npm install                          # 최초 1회
+cp .env.local.example .env.local     # 외부 키는 비어 있어도 빌드 통과
+npm run dev                          # http://localhost:3000
+npm run lint
+npm run build
+```
+
+기본 폴더 구조:
+
+```
+src/
+├── app/                  # App Router (layout, page, globals.css)
+├── components/           # SiteHeader, MobileTabBar
+└── lib/
+    ├── notion/types.ts   # Place 도메인 타입 + CATEGORIES
+    └── map/provider.ts   # MapProvider 인터페이스 (구현은 Phase 1 Step 4)
+```
+
+외부 서비스 키(Kakao Map, Notion API)는 본 단계에 포함되지 않습니다. plan §6 Step 0 참고.
+
+## 10. License & 권리
 
 - 콘텐츠(글·사진)의 권리는 운영자 또는 각 가게에 귀속.
 - 가게 사진·상호 사용은 사전 동의 원칙. 비공개 요청은 48시간 이내 반영.
