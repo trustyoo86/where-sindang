@@ -1,14 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f7f7f7;
+  --foreground: #222222;
 
-  /* Category accent placeholders — finalized in the design pass. */
-  --color-category-food: #d9534f;
-  --color-category-cafe: #b8865b;
-  --color-category-culture: #4a7bcc;
-  --color-category-place: #5fa172;
+  --color-rausch-coral: #ff385c;
+  --color-rausch-deep: #e00b41;
+  --color-carbon: #222222;
+  --color-slate: #6a6a6a;
+  --color-silver: #c1c1c1;
+  --color-pebble: #dddddd;
+  --color-mist: #ebebeb;
+  --color-fog: #f7f7f7;
+  --color-cloud: #ffffff;
+
+  --color-category-food: #ff385c;
+  --color-category-cafe: #222222;
+  --color-category-culture: #6a6a6a;
+  --color-category-place: #ffffff;
 }
 
 @theme inline {
@@ -18,19 +27,22 @@
   --color-category-cafe: var(--color-category-cafe);
   --color-category-culture: var(--color-category-culture);
   --color-category-place: var(--color-category-place);
+  --color-rausch-coral: var(--color-rausch-coral);
+  --color-rausch-deep: var(--color-rausch-deep);
+  --color-carbon: var(--color-carbon);
+  --color-slate: var(--color-slate);
+  --color-silver: var(--color-silver);
+  --color-pebble: var(--color-pebble);
+  --color-mist: var(--color-mist);
+  --color-fog: var(--color-fog);
+  --color-cloud: var(--color-cloud);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  font-feature-settings: "salt";
 }
