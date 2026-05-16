@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "where-sindang",
+  title: "어디가신당",
   description: "서울 신당동 동네 가이드 — 음식·카페·문화·골목 큐레이션",
 };
 
