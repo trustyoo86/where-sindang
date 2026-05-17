@@ -1,115 +1,9 @@
 import type { Place } from "@/lib/notion/types";
 import type { Pin } from "@/lib/map/provider";
 import { CATEGORY_LABELS } from "@/lib/notion/types";
-
-const places: Place[] = [
-  {
-    id: "place-001",
-    slug: "central-market-noodle",
-    title: "중앙시장 칼국수집",
-    category: "food",
-    lat: 37.5662,
-    lng: 127.0198,
-    address: "서울 중구 퇴계로85길",
-    summary: "비 오는 날 생각나는 손칼국수와 겉절이의 단정한 조합.",
-    cover: { url: "warm-table", alt: "따뜻한 국수 한 그릇" },
-    tags: ["노포", "혼밥", "점심"],
-    status: "published",
-    updatedAt: "2026-05-16T00:00:00.000Z",
-  },
-  {
-    id: "place-002",
-    slug: "sindang-roastery",
-    title: "신당 로스터리",
-    category: "cafe",
-    lat: 37.5653,
-    lng: 127.0169,
-    address: "서울 중구 다산로",
-    summary: "골목 안쪽에서 볶는 원두 향과 낮은 음악이 오래 남는 카페.",
-    cover: { url: "coffee-light", alt: "햇빛이 들어오는 커피 바" },
-    tags: ["로스터리", "작업", "디저트"],
-    status: "published",
-    updatedAt: "2026-05-16T00:00:00.000Z",
-  },
-  {
-    id: "place-003",
-    slug: "small-stage-sindang",
-    title: "소극장 신당",
-    category: "culture",
-    lat: 37.5671,
-    lng: 127.0148,
-    address: "서울 중구 난계로",
-    summary: "주말 저녁의 독립 공연과 전시 소식이 모이는 작은 무대.",
-    cover: { url: "gallery-room", alt: "작은 전시 공간" },
-    tags: ["공연", "전시", "주말"],
-    status: "published",
-    updatedAt: "2026-05-16T00:00:00.000Z",
-  },
-  {
-    id: "place-004",
-    slug: "yellow-stair-alley",
-    title: "노란 계단 골목",
-    category: "place",
-    lat: 37.5644,
-    lng: 127.0216,
-    address: "서울 중구 신당동 골목",
-    summary: "낮게 이어지는 주택가와 시장 소리가 만나는 산책 코스.",
-    cover: { url: "alley-sun", alt: "오후 햇살이 드는 골목" },
-    tags: ["산책", "사진", "골목"],
-    status: "published",
-    updatedAt: "2026-05-16T00:00:00.000Z",
-  },
-  {
-    id: "place-005",
-    slug: "late-night-dumpling",
-    title: "밤만두",
-    category: "food",
-    lat: 37.5637,
-    lng: 127.0184,
-    address: "서울 중구 청구로",
-    summary: "늦은 시간에도 불이 켜져 있는 찐만두와 맑은 국물.",
-    cover: { url: "night-kitchen", alt: "밤의 작은 식당" },
-    tags: ["야식", "포장", "만두"],
-    status: "published",
-    updatedAt: "2026-05-16T00:00:00.000Z",
-  },
-  {
-    id: "place-006",
-    slug: "quiet-yard-cafe",
-    title: "조용한 마당",
-    category: "cafe",
-    lat: 37.568,
-    lng: 127.0207,
-    address: "서울 중구 동호로",
-    summary: "작은 마당석에 앉아 신당의 오후를 천천히 보는 곳.",
-    cover: { url: "yard-cafe", alt: "작은 마당이 있는 카페" },
-    tags: ["마당", "커피", "대화"],
-    status: "published",
-    updatedAt: "2026-05-16T00:00:00.000Z",
-  },
-];
-
-const categoryStyles: Record<Place["category"], string> = {
-  food: "border-[#ff385c] bg-white text-[#222222]",
-  cafe: "border-[#222222] bg-[#f7f7f7] text-[#222222]",
-  culture: "border-[#6a6a6a] bg-white text-[#222222]",
-  place: "border-[#dddddd] bg-[#222222] text-white",
-};
-
-const imageStyles: Record<string, string> = {
-  "warm-table":
-    "bg-[radial-gradient(circle_at_28%_24%,#fff4e7_0_12%,transparent_13%),linear-gradient(135deg,#8f3e28_0%,#e6a36f_42%,#fff0df_100%)]",
-  "coffee-light":
-    "bg-[radial-gradient(circle_at_70%_22%,#ffffff_0_10%,transparent_11%),linear-gradient(135deg,#6f4b32_0%,#c99c74_48%,#f6e7d8_100%)]",
-  "gallery-room":
-    "bg-[linear-gradient(90deg,rgba(255,255,255,.55)_0_18%,transparent_19%),linear-gradient(135deg,#d9d9d9_0%,#ffffff_45%,#c7b8a7_100%)]",
-  "alley-sun":
-    "bg-[radial-gradient(circle_at_75%_20%,#fff0a8_0_13%,transparent_14%),linear-gradient(135deg,#d7d0bd_0%,#9da897_52%,#f2d28c_100%)]",
-  "night-kitchen":
-    "bg-[radial-gradient(circle_at_66%_28%,#ffd3a3_0_10%,transparent_11%),linear-gradient(135deg,#241f1d_0%,#7a3f2b_50%,#c07849_100%)]",
-  "yard-cafe":
-    "bg-[radial-gradient(circle_at_24%_78%,#6f8c65_0_16%,transparent_17%),linear-gradient(135deg,#efe6d5_0%,#ffffff_42%,#b7c0a4_100%)]",
-};
+import Link from "next/link";
+import { places } from "@/lib/places/data";
+import { categoryStyles, imageStyles } from "@/lib/places/styles";
 
 const pins: Pin[] = places.map((place) => ({
   id: place.id,
@@ -228,9 +122,10 @@ function SectionHeader({
 
 function PlaceCard({ place }: { place: Place }) {
   return (
-    <article className="group">
+    <Link href={`/places/${place.slug}`} className="group block">
+      <article>
       <div
-        className={`relative aspect-[1.05] overflow-hidden rounded-[20px] bg-[#dddddd] ${imageStyles[place.cover?.url ?? "warm-table"]}`}
+        className={`relative aspect-[1.05] overflow-hidden rounded-[20px] bg-[#dddddd] transition-transform duration-200 group-hover:scale-[1.02] ${imageStyles[place.cover?.url ?? "warm-table"]}`}
       >
         <span className="absolute left-3 top-3 rounded bg-white px-2.5 py-1.5 text-[11px] font-semibold tracking-[0.04em] text-[#222222] drop-shadow-[0_2px_6px_rgba(0,0,0,0.25)]">
           {CATEGORY_LABELS[place.category]}
@@ -261,7 +156,8 @@ function PlaceCard({ place }: { place: Place }) {
           ))}
         </div>
       </div>
-    </article>
+      </article>
+    </Link>
   );
 }
 
