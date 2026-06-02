@@ -1,31 +1,49 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 interface ModalProps {
   children: React.ReactNode;
   titleId?: string;
+  /**
+   * 닫기 전략.
+   * - "back"(기본): 카드 클릭 인터셉트 모달. history 직전이 항상 앱 내부(/)이므로
+   *   router.back()으로 닫아야 @modal 슬롯이 default(null)로 리셋되고,
+   *   브라우저 앞으로가기로 모달을 재오픈할 수 있다.
+   *   (router.push("/")는 soft navigation에서 슬롯을 리셋하지 못해 모달이 남는다.)
+   * - "home": URL 직접 진입/새로고침으로 렌더된 모달. history 직전이 외부 사이트일 수
+   *   있어 router.back()은 사이트를 벗어날 위험이 있으므로 router.push("/")로 홈 복귀.
+   */
+  dismissMode?: "back" | "home";
 }
 
-export default function Modal({ children, titleId }: ModalProps) {
+export default function Modal({
+  children,
+  titleId,
+  dismissMode = "back",
+}: ModalProps) {
   const router = useRouter();
 
-  function closeModal() {
-    router.push("/");
-  }
+  const closeModal = useCallback(() => {
+    if (dismissMode === "home") {
+      router.push("/");
+    } else {
+      router.back();
+    }
+  }, [router, dismissMode]);
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") {
-        router.push("/");
+        closeModal();
       }
     }
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [router]);
+  }, [closeModal]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
