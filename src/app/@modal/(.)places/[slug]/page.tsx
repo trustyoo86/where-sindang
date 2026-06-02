@@ -12,7 +12,7 @@ export default async function PlaceDetailModalPage({
   const place = getPlaceBySlug(slug);
   if (!place) notFound();
   return (
-    <Modal titleId="modal-title">
+    <Modal titleId="modal-title" dismissMode="back">
       <PlaceDetail place={place} variant="modal" />
     </Modal>
   );
