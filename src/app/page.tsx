@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { places } from "@/lib/places/data";
 import { categoryStyles } from "@/lib/places/styles";
 import { PlaceSearch } from "@/components/PlaceSearch";
+import { PostFeed } from "@/components/PostFeed";
 
 const pins: Pin[] = places.map((place) => ({
   id: place.id,
@@ -37,6 +38,8 @@ export default function Home() {
 
           <MapPreview pins={pins} selectedPlace={featuredPlace} />
         </div>
+
+        <PostFeed />
       </section>
     </div>
   );
