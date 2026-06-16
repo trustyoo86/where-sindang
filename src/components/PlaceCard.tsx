@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Place } from "@/lib/notion/types";
 import { CATEGORY_LABELS } from "@/lib/notion/types";
 import { imageStyles } from "@/lib/places/styles";
+import { SaveButton } from "./SaveButton";
 
 export function PlaceCard({ place }: { place: Place }) {
   return (
@@ -14,6 +15,9 @@ export function PlaceCard({ place }: { place: Place }) {
             {CATEGORY_LABELS[place.category]}
           </span>
           <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/20 to-transparent opacity-80" />
+          <div className="absolute right-2 top-2">
+            <SaveButton slug={place.slug} />
+          </div>
         </div>
 
         <div className="px-1 pt-3">
